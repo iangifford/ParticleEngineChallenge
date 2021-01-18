@@ -1,0 +1,23 @@
+canvas {
+    border: 2px;
+    border-radius: 2px;
+    border-color: black;
+    border-style: solid;
+    width: 75%;
+    height: 75%;
+    min-width: 400px;
+    min-height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.canvas_div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.source_image {
+    visibility: hidden;
+}
