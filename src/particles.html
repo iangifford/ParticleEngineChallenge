@@ -3,9 +3,8 @@
 
 <head>
     <link rel="stylesheet" href="main.css">
-
+    <script type="text/javascript" src="scripts/particle.js"></script>
     <script type="text/javascript" src="scripts/snowflake.js"></script>
-    <script type="text/javascript" src="scripts/engine.js"></script>
     <title>Particle Engine</title>
 </head>
 
@@ -13,12 +12,12 @@
     <div id="canvas_div">
         <canvas id="physicsCanvas"></canvas>
 
-
+        <script type="text/javascript" src="scripts/engine.js"></script>
     </div>
-    <button id="startButton" type="button" onClick="start()">Start</button>
-    <button id="stopButton" type="button" onClick="stop()">Stop</button>
-    <!--source images-->
-    <img class="source_image" id="snowflake_big" src="assets/snflbig.png">
+    <button id="startButton" type="button" onClick="start();">Start</button>
+    <button id="stopButton" type="button" onClick="stop();">Stop</button>
+    <button id="clearButton" type="button" onClick="clearCanvas();">Clear</button>
+    <button id="snowButton" type="button" onClick="snow();">Snow</button>
 </body>
 
 </html>
