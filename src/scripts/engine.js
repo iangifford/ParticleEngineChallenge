@@ -7,7 +7,7 @@ const windMax = 0.05;
 const windMin = 0.02;
 const snowHeight = 20;
 const spriteSize = 30;
-const snowflakesPerTick = 2;
+const snowflakesPerTick = 1;
 const airResistance = 0.60; //maintain this portion of velocities per second,  processing-fast way to fake it
 const extraCanvasWidths = 2; //how far out falling particles can spawn for the purposes of not looking weird in strong wind
 const maximumSpawnHeight = 0.5; //multiple of canvas height to spawn particles above the screen
@@ -21,6 +21,7 @@ function defaultBackground() {
 
 var run = false;
 var firstrun = true;
+var setup = false;
 var wind = false;
 var windShown = 0;
 var windTrueAcc = 0;
@@ -57,7 +58,9 @@ function initialSetup() {
 
 
 function start() {
-    run = true;
+    if (setup) {
+        run = true;
+    }
 
 }
 
@@ -72,7 +75,10 @@ function clearCanvas() {
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     wind = false;
     particles = [];
+    currentBackground = defaultBackground;
+    setup = false;
     console.log("cleared.");
+
 }
 
 
@@ -84,6 +90,7 @@ function snow() {
     currentParticle = snowflakeParticle;
     wind = true;
     particles = [];
+    setup = true;
 }
 
 
@@ -95,6 +102,7 @@ function tick_particles() {
         if (particles[i] !== undefined) {
             if (particles[i].dead) {
                 particles.splice(i, 1);
+                i--;
             } else {
                 particles[i].tick();
             }
