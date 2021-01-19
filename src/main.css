@@ -2,9 +2,10 @@
     --black: #18181A;
     --dark: #0d053fcc;
     --primary: #006494ff;
-    --secondary: #247ba0ff;
+    --secondary: rgb(48, 125, 158);
     --accent: #1b98e0ff;
     --white: #e8f1f2ff;
+    --active: #2a9627;
 }
 
 body {
@@ -16,7 +17,7 @@ button {
     margin: auto;
     width: 92px;
     height: 92px;
-    background-color: var(--dark);
+    background-color: var(--primary);
     border: none;
     border-color: var(--white);
     border-width: 2px;
@@ -29,7 +30,7 @@ button:hover {
     margin: auto;
     width: 92px;
     height: 92px;
-    background-color: var(--primary);
+    background-color: var(--accent);
     border-color: var(--white);
     border-width: 2px;
     border-radius: 2px;
@@ -74,5 +75,5 @@ canvas {
 }
 
 .active {
-    background-color: var(--secondary);
+    background-color: var(--active) !important;
 }
