@@ -19,6 +19,7 @@ function defaultBackground() {
 }
 
 var run = false;
+var pauseTicking = false;
 var firstrun = true;
 var setup = false;
 var wind = false;
@@ -53,12 +54,18 @@ function initialSetup() {
 function start() {
     if (setup) {
         run = true;
+        pauseTicking = false;
     }
 
 }
 
 function stop() {
+    pauseTicking = false;
     run = false;
+}
+
+function pause() {
+    pauseTicking = true;
 }
 
 function clearCanvas() {
@@ -123,14 +130,16 @@ function updateWind() {
 
 function mainloop() {
     //console.log("loop");
-    ticks++;
-    currentBackground();
-    if (run) {
-        spawnParticle();
+    if (!pauseTicking) {
+        ticks++;
+        currentBackground();
+        if (run) {
+            spawnParticle();
+        }
+        updateWind();
+        tick_particles();
+        draw_particles();
     }
-    updateWind();
-    tick_particles();
-    draw_particles();
     requestAnimationFrame(mainloop);
 }
 

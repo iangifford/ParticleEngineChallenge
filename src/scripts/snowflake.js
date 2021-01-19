@@ -1,5 +1,5 @@
-const snowflakeAirResistance = .85;
-const snowMass = 0.25;
+const snowflakeAirResistance = .75;
+const snowMass = 0.1;
 class snowflakeParticle extends physicsParticle {
 
     constructor(context, x, y) {
@@ -8,7 +8,7 @@ class snowflakeParticle extends physicsParticle {
         this.splatTick = 0;
         this.splatStage = 0;
         this.setSplats();
-        this.mass = snowMass
+        this.mass = snowMass * (0.98 + Math.random() / 25) // up to %2 mass diff
         this.airResistance = snowflakeAirResistance * (0.98 + Math.random() / 25) // +- up to 2% resistance randomly
         var randpic = getRandomInt(4);
         var image = new Image();

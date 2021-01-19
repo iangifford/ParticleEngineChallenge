@@ -1,23 +1,78 @@
-canvas {
-    border: 0px;
-    border-radius: 0px;
-    border-color: black;
+:root {
+    --black: #18181A;
+    --dark: #0d053fcc;
+    --primary: #006494ff;
+    --secondary: #247ba0ff;
+    --accent: #1b98e0ff;
+    --white: #e8f1f2ff;
+}
+
+body {
+    background: var(--black);
+}
+
+button {
+    padding-left: -300px;
+    margin: auto;
+    width: 92px;
+    height: 92px;
+    background-color: var(--dark);
+    border: none;
+    border-color: var(--white);
+    border-width: 2px;
+    border-radius: 2px;
     border-style: solid;
-    width: 75%;
-    height: 75%;
+}
+
+button:hover {
+    padding: 0px;
+    margin: auto;
+    width: 92px;
+    height: 92px;
+    background-color: var(--primary);
+    border-color: var(--white);
+    border-width: 2px;
+    border-radius: 2px;
+    border-style: solid;
+}
+
+canvas {
+    border: 2px;
+    border-radius: 1px;
+    border-color: var(--accent);
+    border-style: solid;
+    width: 100%;
+    height: 100%;
     min-width: 400px;
     min-height: 400px;
     display: block;
+}
+
+.canvas_div {
     margin-left: auto;
     margin-right: auto;
 }
 
-.canvas_div {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.button_div {
+    width: 25%;
+    height: auto;
 }
 
 .source_image {
     visibility: hidden;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    background-color: var(--secondary);
 }

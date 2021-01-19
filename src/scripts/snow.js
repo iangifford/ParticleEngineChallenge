@@ -20,6 +20,8 @@ function snowBackground() {
     context.fillRect(0, context.canvas.height - snowHeight, context.canvas.width, snowHeight);
 }
 
+
+
 function spawnSnow() {
     var i;
     for (i = 0; i < snowflakesPerTick; i++) {
