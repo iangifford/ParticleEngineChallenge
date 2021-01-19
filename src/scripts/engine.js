@@ -1,18 +1,17 @@
 var width = 0;
 var height = 0;
 var context;
-const gravity = 0.05;
+const gravity = 1;
 const death_barrier = 100;
-const windMax = 0.05;
-const windMin = 0.02;
-const snowHeight = 20;
+const windMax = 0.2;
+const windMin = 0.0;
+
 const spriteSize = 30;
-const snowflakesPerTick = 1;
-const airResistance = 0.60; //maintain this portion of velocities per second,  processing-fast way to fake it
 const extraCanvasWidths = 2; //how far out falling particles can spawn for the purposes of not looking weird in strong wind
-const maximumSpawnHeight = 0.5; //multiple of canvas height to spawn particles above the screen
-const minimumSpawnHeight = 0.1; //minimum pixels for a particle to spawn above the screen
+const maximumSpawnHeight = 0.6; //multiple of canvas height to spawn particles above the screen
+const minimumSpawnHeight = 0.3; //minimum pixels for a particle to spawn above the screen
 var ticks = 0;
+var spawnParticle;
 
 function defaultBackground() {
     context.fillStyle = "white";
@@ -38,12 +37,6 @@ function getRandomIntRange(min, max) {
 }
 
 
-function snowBackground() {
-    context.fillStyle = "black";
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    context.fillStyle = "white";
-    context.fillRect(0, context.canvas.height - snowHeight, context.canvas.width, snowHeight);
-}
 
 
 function initialSetup() {
@@ -83,15 +76,6 @@ function clearCanvas() {
 
 
 
-function snow() {
-    snowBackground();
-    currentBackground = snowBackground;
-
-    currentParticle = snowflakeParticle;
-    wind = true;
-    particles = [];
-    setup = true;
-}
 
 
 function tick_particles() {
@@ -135,20 +119,14 @@ function updateWind() {
     }
 }
 
-function create_random_particle() {
-    var i;
-    for (i = 0; i < snowflakesPerTick; i++) {
-        particles.push(new currentParticle(context, getRandomIntRange(-1 * extraCanvasWidths * context.canvas.width, (1 + extraCanvasWidths) * context.canvas.width), getRandomIntRange(-1 * minimumSpawnHeight * context.canvas.height, -1 * maximumSpawnHeight * context.canvas.height)));
-    }
-}
+
 
 function mainloop() {
     //console.log("loop");
     ticks++;
     currentBackground();
     if (run) {
-
-        create_random_particle();
+        spawnParticle();
     }
     updateWind();
     tick_particles();

@@ -1,3 +1,5 @@
+const airResistance = .98;
+const defaultMass = 1;
 class physicsParticle {
 
     constructor(context, x, y) {
@@ -7,7 +9,8 @@ class physicsParticle {
         this.vy = 0;
         this.ax = 0;
         this.ay = 0;
-        this.terVel = 100;
+        this.mass = defaultMass;
+        this.airResistance = airResistance;
         this.context = context;
         this.dead = false;
 
