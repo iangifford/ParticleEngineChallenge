@@ -7,7 +7,9 @@ function rain() {
     currentBackground = rainBackground;
 
     currentParticle = raindropParticle;
-    wind = true;
+    if (wind) {
+        toggleWind();
+    }
     particles = [];
     setup = true;
     spawnParticle = spawnRain;

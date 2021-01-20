@@ -3,10 +3,12 @@ function highlightControl(element) {
     var startButton = document.getElementById("startButton");
     var pauseButton = document.getElementById("pauseButton");
     if (element.id == stopButton.id) {
-        console.log("stopping");
-        stopButton.classList.add("active");
-        pauseButton.classList.remove("active");
-        startButton.classList.remove("active");
+        if (setup) {
+            console.log("stopping");
+            stopButton.classList.add("active");
+            pauseButton.classList.remove("active");
+            startButton.classList.remove("active");
+        }
     } else if (element.id == startButton.id) {
         if (setup) {
             console.log("playing");
@@ -16,9 +18,11 @@ function highlightControl(element) {
         }
 
     } else if (element.id == pauseButton.id) {
-        console.log("pausing");
-        pauseButton.classList.add("active");
-        startButton.classList.remove("active");
+        if (setup) {
+            console.log("pausing");
+            pauseButton.classList.add("active");
+            startButton.classList.remove("active");
+        }
     } else {
         console.log("Unknown button");
     }
@@ -38,14 +42,38 @@ function highlightType(element) {
         startButton.classList.remove("active");
         pauseButton.classList.remove("active");
         stopButton.classList.remove("active");
+        fireworkButton.classList.remove("active");
+        if (wind) {
+            toggleWind();
+        }
 
     } else if (element.id == snowButton.id) {
         console.log("snowing");
         rainButton.classList.remove("active");
         snowButton.classList.add("active");
+        fireworkButton.classList.remove("active");
     } else if (element.id == rainButton.id) {
         console.log("raining");
         rainButton.classList.add("active");
         snowButton.classList.remove("active");
+        fireworkButton.classList.remove("active");
+
+    } else if (element.id == fireworkButton.id) {
+        console.log("fireworks");
+        fireworkButton.classList.add("active");
+        snowButton.classList.remove("active");
+        rainButton.classList.remove("active");
+    }
+}
+
+function toggleWind() {
+    if (setup) {
+        var windButton = document.getElementById("windButton");
+        wind = !wind;
+        if (wind) {
+            windButton.classList.add("active");
+        } else {
+            windButton.classList.remove("active");
+        }
     }
 }

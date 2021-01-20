@@ -6,9 +6,12 @@ function snow() {
     currentBackground = snowBackground;
 
     currentParticle = snowflakeParticle;
-    wind = true;
+
     particles = [];
     setup = true;
+    if (!wind) {
+        toggleWind();
+    }
     spawnParticle = spawnSnow;
 }
 

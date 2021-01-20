@@ -13,6 +13,7 @@ class physicsParticle {
         this.airResistance = airResistance;
         this.context = context;
         this.dead = false;
+        this.objectCollision = false;
 
 
         this.image = new Image();

@@ -1,9 +1,10 @@
 var width = 0;
 var height = 0;
 var context;
+var windMax = 0.2;
 const gravity = 1;
 const death_barrier = 100;
-const windMax = 0.2;
+const defaultWindMax = 0.2
 const windMin = 0.0;
 
 const spriteSize = 30;
@@ -122,7 +123,11 @@ function updateWind() {
             windShown = 0;
         }
     } else {
-        windShown = 0;
+        if (windShown > 0.0001) {
+            windShown *= 0.99;
+        } else {
+            windShown = 0;
+        }
     }
 }
 

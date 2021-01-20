@@ -1,5 +1,5 @@
 const raindropAirResistance = .96;
-const rainMass = 5;
+const rainMass = 0.5;
 class raindropParticle extends physicsParticle {
 
     constructor(context, x, y) {
