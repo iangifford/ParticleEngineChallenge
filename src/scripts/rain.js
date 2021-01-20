@@ -9,6 +9,7 @@ function rain() {
     currentParticle = raindropParticle;
     if (wind) {
         toggleWind();
+        windShown = 0;
     }
     particles = [];
     setup = true;

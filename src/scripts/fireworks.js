@@ -9,6 +9,7 @@ function fireworks() {
     currentParticle = rocketParticle;
     if (wind) {
         toggleWind();
+        windShown = 0;
     }
     particles = [];
     setup = true;

@@ -45,6 +45,7 @@ function highlightType(element) {
         fireworkButton.classList.remove("active");
         if (wind) {
             toggleWind();
+            windShown = 0;
         }
 
     } else if (element.id == snowButton.id) {
