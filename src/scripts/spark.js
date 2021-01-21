@@ -2,6 +2,7 @@ const sparkAirResistance = .96;
 const sparkMass = 1.9;
 const maxBurn = 1;
 const burnDecr = 0.1;
+//spark that comes out of the back of fireworks as it zooms up
 class sparkParticle extends physicsParticle {
 
     constructor(context, x, y, initialVX, initialVY) {
@@ -28,7 +29,7 @@ class sparkParticle extends physicsParticle {
 
     }
 
-
+    //update particle
     tick() {
         if (!this.dead) {
             this.ay = gravity; // Currently the only source of vertical acc
@@ -48,15 +49,15 @@ class sparkParticle extends physicsParticle {
         }
     }
 
-
+    //draw particle
     draw() {
 
 
         if (!this.dead) {
             var movementAngle = Math.atan(-this.vx / this.vy);
-            context.save();
+            context.save(); //sacve and restore to prevent context drift
             context.translate(this.x, this.y);
-            context.rotate(movementAngle);
+            context.rotate(movementAngle); //turn with momentum
             if (this.burnTick > 0) {
                 context.globalAlpha = this.burnTick / maxBurn;
             }
