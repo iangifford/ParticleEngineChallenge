@@ -26,7 +26,7 @@ When this is toggled on, the wind slider becomes active and can be used.
 ## Clear![clear button](https://github.com/iangifford/ParticleEngineChallenge/blob/main/src/assets/page_assets/clear.png?raw=true)
 Removed the current background, instantly kills all particles, and turns off the current particle spawning effect.
 
-## Snow![snow button](https://github.com/iangifford/ParticleEngineChallenge/blob/main/src/assets/page_assets/snow.png?raw=true){:background-color=black}
+## Snow![snow button](https://github.com/iangifford/ParticleEngineChallenge/blob/main/src/assets/page_assets/snow.png?raw=true)
 Begins a snow effect. Has wind by default. Snow splats on the snow layer on the ground.
 
 ## Rain![rain button](https://github.com/iangifford/ParticleEngineChallenge/blob/main/src/assets/page_assets/rain.png?raw=true)
