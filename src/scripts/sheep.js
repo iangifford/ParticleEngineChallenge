@@ -8,7 +8,7 @@ var sinDataRadians = [0, 374.39179167229344, 0.7812796511915603, -1, 159.1562435
     //you get particles that draw a sheep as they expand and maintain the shape 
     //trying to use preset coordinates and velocities is 100x harder, and way less flexible 
     //(would mean you had a set number of sheep particles, couldnt randomize it)
-const fourierPortion = 1 / 4; //what portion of the fourier series to use
+const fourierPortion = 1 / 3; //what portion of the fourier series to use
 
 
 function getSheepSin(angle) {
