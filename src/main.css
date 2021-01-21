@@ -18,10 +18,9 @@ body {
 }
 
 button {
-    padding-left: -300px;
     margin: auto;
-    width: 92px;
-    height: 92px;
+    width: 8vw;
+    height: 8vw;
     background-color: var(--primary);
     border: none;
     border-color: var(--white);
@@ -31,10 +30,6 @@ button {
 }
 
 button:hover {
-    padding: 0px;
-    margin: auto;
-    width: 92px;
-    height: 92px;
     background-color: var(--accent);
     border-color: var(--white);
     border-width: 2px;
@@ -54,14 +49,23 @@ canvas {
     display: block;
 }
 
+.buttonicon {
+    height: 75%;
+    width: 75%;
+    flex-shrink: 0;
+}
+
 .canvas_div {
-    margin-left: auto;
-    margin-right: auto;
+    width: 75vw;
+    height: 75vh;
 }
 
 .button_div {
     width: 25%;
-    height: auto;
+    height: 75vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
 }
 
 .source_image {
@@ -140,8 +144,8 @@ canvas {
 }
 
 .slidericon {
-    width: 64px;
-    height: 64px;
+    width: 4vw;
+    height: 4vw;
     vertical-align: middle;
     border-width: 2px;
     border-radius: 2px;
@@ -156,11 +160,11 @@ canvas {
 }
 
 .sliderLabel {
-    width: 70px;
+    width: 6vw;
     margin: auto;
     margin-right: 20%;
-    margin-left: 8px;
-    font-size: 20px;
+    margin-left: 1vw;
+    font-size: 1.75vw;
     font-family: Pixel;
     text-align: right;
     color: var(--white);

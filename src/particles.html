@@ -20,14 +20,18 @@
 <body>
     <div class="row">
         <div class="button_div column">
-            <button id="startButton" type="button" onClick="highlightControl(this);start();"><img
-                    src="assets/page_assets/play.png"></button>
-            <button id="pauseButton" type="button" onClick="highlightControl(this);pause();"><img
-                    src="assets/page_assets/pause.png"></button>
-            <button id="stopButton" type="button" onClick="highlightControl(this);stop();"><img
-                    src="assets/page_assets/stop.png"></button>
-            <button id="windButton" type="button" onClick="toggleWind();"><img
-                    src="assets/page_assets/wind.png"></button>
+            <button id="startButton" type="button" onClick="highlightControl(this);start();">
+                <div><img class="buttonicon" src="assets/page_assets/play.png"></div>
+            </button>
+            <button id="pauseButton" type="button" onClick="highlightControl(this);pause();">
+                <div><img class="buttonicon"src="assets/page_assets/pause.png"></div>
+            </button>
+            <button id="stopButton" type="button" onClick="highlightControl(this);stop();">
+                <div><img class="buttonicon"src="assets/page_assets/stop.png"></div>
+            </button>
+            <button id="windButton" onClick="toggleWind();">
+                <div><img class="buttonicon" type="button"src="assets/page_assets/wind.png"></div>
+            </button>
         </div>
         <div class="canvas_div column">
             <canvas id="physicsCanvas"></canvas>
@@ -35,19 +39,23 @@
             <script type="text/javascript" src="scripts/engine.js"></script>
         </div>
         <div class="button_div column">
-            <button id="clearButton" type="button" onClick="highlightType(this);clearCanvas();"><img
-                    src="assets/page_assets/clear.png"></button>
-            <button id="snowButton" type="button" onClick="highlightType(this);snow();"><img
-                    src="assets/page_assets/snow.png"></button>
-            <button id="rainButton" type="button" onClick="highlightType(this);rain();"><img
-                    src="assets/page_assets/rain.png"></button>
-            <button id="fireworkButton" type="button" onClick="highlightType(this);fireworks();"><img
-                    src="assets/page_assets/fireworks.png"></button>
+            <button id="clearButton" type="button" onClick="highlightType(this);clearCanvas();">
+                <div><img class="buttonicon"src="assets/page_assets/clear.png"></div>
+            </button>
+            <button id="snowButton" type="button" onClick="highlightType(this);snow();">
+                <div><img class="buttonicon"src="assets/page_assets/snow.png"></div>
+            </button>
+            <button id="rainButton" type="button" onClick="highlightType(this);rain();">
+                <div><img class="buttonicon"src="assets/page_assets/rain.png"></div>
+            </button>
+            <button id="fireworkButton" type="button" onClick="highlightType(this);fireworks();">
+                <div><img  class="buttonicon"src="assets/page_assets/fireworks.png"></div>
+            </button>
 
         </div>
     </div>
     <div class="row" style="margin-top:2%"></div>
-    <div class="row" stlye="height:80px;" id="windSliderRow">
+    <div class="row" stlye="height:10%;" id="windSliderRow">
         <div class="column" style="margin-left:22%">
             <img src="assets/page_assets/wind.png" class="slidericon">
         </div>
