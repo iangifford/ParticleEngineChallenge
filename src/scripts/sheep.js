@@ -8,7 +8,7 @@ function getSheepSin(angle) {
     var modifierY = 0;
     var i;
     var innerSin;
-    for (i = 0; i < (sinDataRadians.length / 3) - 1; i += 3) {
+    for (i = 0; i < (sinDataRadians.length / 12) - 1; i += 3) {
         innerSin = sinDataRadians[i] * angle + sinDataRadians[i + 2];
         //console.log(sinDataRadians[i]);
         modifierX += sinDataRadians[i + 1] * Math.cos(innerSin);
