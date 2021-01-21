@@ -10,7 +10,7 @@ On the left side are the Play, Pause, Stop, and Wind controls.<br>
 On the right are the Clear, Snow, Rain, and Firework buttons.<br>
 On the in the middle below the simulation viewing area is the Wind Slider.
 
-## Play
+## Play ![play button](https://github.com/iangifford/ParticleEngineChallenge/blob/main/src/assets/page_assets/clear.png?raw=true)
 Runs the simulation. Acts to both unpause the simulation, as well as begin it (If it was stopped or had not been started yet)
 
 ## Pause
