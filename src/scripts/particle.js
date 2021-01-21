@@ -1,5 +1,7 @@
 const airResistance = .98;
 const defaultMass = 1;
+//default particle
+//usable for testing, but just a black square
 class physicsParticle {
 
     constructor(context, x, y) {
