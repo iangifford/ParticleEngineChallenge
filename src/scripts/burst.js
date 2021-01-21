@@ -4,12 +4,16 @@ const burstLength = 3;
 const heat = -.99
 class burstParticle extends physicsParticle {
 
-    constructor(context, x, y, initialVX, initialVY, duration, color) {
+    constructor(context, x, y, initialVX, initialVY, duration, color, airResistanceModifier) {
         super(context, x, y);
         this.burnTick = duration;
         this.maxDuration = duration;
         this.mass = burstMass;
-        this.airResistance = burstAirResistance * (0.99 + Math.random() / 50); // +- up to 2% resistance randomly
+        if (airResistanceModifier > 0) {
+            this.airResistance = burstAirResistance * ((1 - airResistanceModifier) + Math.random() / (0.5 / airResistanceModifier)); // +- up to 2% resistance randomly
+        } else {
+            this.airResistance = burstAirResistance;
+        }
         this.vx = initialVX;
         this.vy = initialVY;
         var image = new Image();

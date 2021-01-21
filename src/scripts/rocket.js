@@ -6,9 +6,12 @@ const sparksPerTick = 4;
 const maxOffset = 3;
 const minExplosionParticles = 50;
 const maxExplosionParticles = 100;
+const sheepParticles = 200;
 const explosionPower = 0.8;
 const minExplosionDuration = 6;
 const maxExplosionDuration = 10;
+const sheepDuration = 12;
+const sheepExplosionPower = 0.8;
 class rocketParticle extends physicsParticle {
 
     constructor(context, x, y) {
@@ -59,7 +62,7 @@ class rocketParticle extends physicsParticle {
         }
     }
     explode() {
-        var style = getRandomInt(4);
+        var style = getRandomInt(6);
 
         var explosionParticles = getRandomIntRange(minExplosionParticles, maxExplosionParticles);
         var angle = -Math.PI;
@@ -73,7 +76,7 @@ class rocketParticle extends physicsParticle {
                 for (i = 0; i < explosionParticles; i++) {
                     vx = realPower * Math.cos(angle + angleOffset);
                     vy = realPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color);
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
                     particles.push(newSpark);
                     angle = i * 2 * Math.PI / explosionParticles;
                 }
@@ -87,7 +90,7 @@ class rocketParticle extends physicsParticle {
                     modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
                     vx = modifiedPower * Math.cos(angle + angleOffset);
                     vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color);
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
                     particles.push(newSpark);
                     angle = i * 2 * Math.PI / explosionParticles;
                 }
@@ -100,7 +103,7 @@ class rocketParticle extends physicsParticle {
                     modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
                     vx = modifiedPower * Math.cos(angle + angleOffset);
                     vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color);
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
                     particles.push(newSpark);
                     angle = i * 2 * Math.PI / explosionParticles;
                 }
@@ -114,9 +117,49 @@ class rocketParticle extends physicsParticle {
                     modifiedPower = realPower * Math.pow(((modifier + 1) / (modifiedPower + 1)), 2);
                     vx = modifiedPower * Math.cos(angle + angleOffset);
                     vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color);
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
                     particles.push(newSpark);
                     angle = i * 2 * Math.PI / explosionParticles;
+                }
+                break;
+            case 4: //sheep
+                console.log("sheepA");
+                var totalLoops = 1;
+                explosionParticles = sheepParticles;
+                angleOffset = 0;
+                realPower *= 2;
+                var modifiedPower;
+                var modifier = Math.PI / 4;
+                duration = sheepDuration;
+                realPower = sheepExplosionPower;
+                for (i = 0; i < explosionParticles; i++) {
+                    modifiedPower = getSheepSin(angle);
+                    //console.log(modifiedPower);
+                    vx = modifiedPower[0] * realPower / 300;
+                    vy = modifiedPower[1] * realPower / 300;
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, 0.0001);
+                    particles.push(newSpark);
+                    angle = i * 2 * totalLoops * Math.PI / explosionParticles;
+                }
+                break;
+            case 5: //sheep
+                console.log("sheepB");
+                var totalLoops = 1;
+                explosionParticles = sheepParticles;
+                angleOffset = 0;
+                realPower *= 2;
+                var modifiedPower;
+                var modifier = Math.PI / 4;
+                duration = sheepDuration;
+                realPower = sheepExplosionPower;
+                for (i = 0; i < explosionParticles; i++) {
+                    modifiedPower = getSheepSin(angle);
+                    //console.log(modifiedPower);
+                    vx = modifiedPower[0] * realPower / 300;
+                    vy = modifiedPower[1] * realPower / 300;
+                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, 0.0001);
+                    particles.push(newSpark);
+                    angle = i * 2 * totalLoops * Math.PI / explosionParticles;
                 }
                 break;
 

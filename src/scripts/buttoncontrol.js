@@ -68,13 +68,23 @@ function highlightType(element) {
 }
 
 function toggleWind() {
+
     if (setup) {
         var windButton = document.getElementById("windButton");
+        var windSliderRow = document.getElementById("windSliderRow");
+        var windSlider = document.getElementById("windSlider");
+        var pauseButton = document.getElementById("pauseButton");
         wind = !wind;
         if (wind) {
             windButton.classList.add("active");
+            windSliderRow.style.opacity = 1;
+            windSlider.disabled = false;
+            windSlider.classList.add("sliderHover");
         } else {
             windButton.classList.remove("active");
+            windSliderRow.style.opacity = 0.5;
+            windSlider.disabled = true;
+            windSlider.classList.remove("sliderHover");
         }
     }
 }

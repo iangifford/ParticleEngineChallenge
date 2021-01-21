@@ -13,6 +13,7 @@
     <script type="text/javascript" src="scripts/rain.js"></script>
     <script type="text/javascript" src="scripts/fireworks.js"></script>
     <script type="text/javascript" src="scripts/buttoncontrol.js"></script>
+    <script type="text/javascript" src="scripts/sheep.js"></script>
     <title>Particle Engine</title>
 </head>
 
@@ -46,19 +47,24 @@
         </div>
     </div>
     <div class="row" style="margin-top:2%"></div>
-    <div class="row" stlye="height:80px;">
+    <div class="row" stlye="height:80px;" id="windSliderRow">
         <div class="column" style="margin-left:22%">
             <img src="assets/page_assets/wind.png" class="slidericon">
         </div>
 
-        <div class="column" style="width:50%;margin-right:22%">
+        <div class="column" style="width:50%;">
 
             <div class="slidecontainer">
-                <input type="range" min="0" max="100" value="50" class="slider" step="5" id="windSlider">
-                <script type="text/javascript" src="scripts/slider.js"></script>
+                <input type="range" min="0" max="100" value="50" class="slider sliderHover" step="5" id="windSlider">
+
             </div>
 
         </div>
+        <div class="column sliderLabel" id="windSliderLabel">
+
+            200%
+        </div>
+        <script type="text/javascript" src="scripts/slider.js"></script>
     </div>
 </body>
 
