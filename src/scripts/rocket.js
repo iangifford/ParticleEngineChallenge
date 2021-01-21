@@ -10,7 +10,7 @@ const sheepParticles = 150;
 const explosionPower = 0.8;
 const minExplosionDuration = 6;
 const maxExplosionDuration = 10;
-const sheepDuration = 10;
+const sheepDuration = 12;
 const sheepExplosionPower = 0.8;
 class rocketParticle extends physicsParticle {
 
