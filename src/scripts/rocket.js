@@ -175,7 +175,7 @@ class rocketParticle extends physicsParticle {
         context.rotate(movementAngle);
         this.context.drawImage(this.image, 0, 0);
         context.restore();
-        break;
+
     }
 
 
