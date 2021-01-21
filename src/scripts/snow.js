@@ -1,6 +1,6 @@
 const snowflakesPerTick = 4;
 const snowHeight = 20;
-
+//snowing effect
 function snow() {
     snowBackground();
     currentBackground = snowBackground;
@@ -15,7 +15,7 @@ function snow() {
     spawnParticle = spawnSnow;
 }
 
-
+//black with white on the ground to represent snow layer
 function snowBackground() {
     context.fillStyle = "black";
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
@@ -24,7 +24,7 @@ function snowBackground() {
 }
 
 
-
+//spawn a bunch of flakes per tick
 function spawnSnow() {
     var i;
     for (i = 0; i < snowflakesPerTick; i++) {
