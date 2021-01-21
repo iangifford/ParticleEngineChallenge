@@ -96,6 +96,8 @@ class rocketParticle extends physicsParticle {
                     }
                     break;
                 case 2: //star
+                    //todo: find out why literally one spark is messed up on this, just randomly slower than the rest
+                    //probably a float precision thing
                     var modifiedPower;
                     var modifier = Math.PI / 2.5;
                     for (i = 0; i < explosionParticles; i++) {
@@ -123,7 +125,7 @@ class rocketParticle extends physicsParticle {
                     }
                     break;
                 case 4: //sheep
-                case 5: //sheep
+                case 5: //sheep - extra sheep to flex the hardest shape even harder :))
                     console.log("sheep");
                     var totalLoops = 1;
                     explosionParticles = getRandomIntRange(sheepParticlesMin, sheepParticlesMax);
