@@ -6,7 +6,8 @@ const sparksPerTick = 4;
 const maxOffset = 3;
 const minExplosionParticles = 50;
 const maxExplosionParticles = 100;
-const sheepParticles = 150;
+const sheepParticlesMin = 150;
+const sheepParticlesMax = 250;
 const explosionPower = 0.8;
 const minExplosionDuration = 6;
 const maxExplosionDuration = 10;
@@ -62,147 +63,119 @@ class rocketParticle extends physicsParticle {
         }
     }
     explode() {
-        var style = getRandomInt(6);
+            var style = getRandomInt(6);
+            var explosionParticles = getRandomIntRange(minExplosionParticles, maxExplosionParticles);
+            var angle = -Math.PI;
+            var i, vx, vy;
+            var color = getRandomInt(5);
+            var realPower = explosionPower * (0.5 + Math.random());
+            var duration = Math.random() * (maxExplosionDuration - minExplosionDuration) + minExplosionDuration;
+            var angleOffset = Math.PI / Math.random();
+            switch (style) {
+                case 0: //circle
+                    for (i = 0; i < explosionParticles; i++) {
+                        vx = realPower * Math.cos(angle + angleOffset);
+                        vy = realPower * Math.sin(angle + angleOffset);
+                        var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
+                        particles.push(newSpark);
+                        angle = i * 2 * Math.PI / explosionParticles;
+                    }
+                    break;
+                case 1: //plus
+                    var modifiedPower;
+                    var modifier = Math.PI / 2;
 
-        var explosionParticles = getRandomIntRange(minExplosionParticles, maxExplosionParticles);
-        var angle = -Math.PI;
-        var i, vx, vy;
-        var color = getRandomInt(5);
-        var realPower = explosionPower * (0.5 + Math.random());
-        var duration = Math.random() * (maxExplosionDuration - minExplosionDuration) + minExplosionDuration;
-        var angleOffset = Math.PI / Math.random();
-        switch (style) {
-            case 0: //circle
-                for (i = 0; i < explosionParticles; i++) {
-                    vx = realPower * Math.cos(angle + angleOffset);
-                    vy = realPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
-                    particles.push(newSpark);
-                    angle = i * 2 * Math.PI / explosionParticles;
-                }
-                break;
-            case 1: //plus
-                var modifiedPower;
-                var modifier = Math.PI / 2;
+                    for (i = 0; i < explosionParticles; i++) {
+                        modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
+                        modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
+                        vx = modifiedPower * Math.cos(angle + angleOffset);
+                        vy = modifiedPower * Math.sin(angle + angleOffset);
+                        var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
+                        particles.push(newSpark);
+                        angle = i * 2 * Math.PI / explosionParticles;
+                    }
+                    break;
+                case 2: //star
+                    var modifiedPower;
+                    var modifier = Math.PI / 2.5;
+                    for (i = 0; i < explosionParticles; i++) {
+                        modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
+                        modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
+                        vx = modifiedPower * Math.cos(angle + angleOffset);
+                        vy = modifiedPower * Math.sin(angle + angleOffset);
+                        var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
+                        particles.push(newSpark);
+                        angle = i * 2 * Math.PI / explosionParticles;
+                    }
+                    break;
 
-                for (i = 0; i < explosionParticles; i++) {
-                    modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
-                    modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
-                    vx = modifiedPower * Math.cos(angle + angleOffset);
-                    vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
-                    particles.push(newSpark);
-                    angle = i * 2 * Math.PI / explosionParticles;
-                }
-                break;
-            case 2: //star
-                var modifiedPower;
-                var modifier = Math.PI / 2.5;
-                for (i = 0; i < explosionParticles; i++) {
-                    modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
-                    modifiedPower = realPower * ((modifier + 1) / (modifiedPower + 1));
-                    vx = modifiedPower * Math.cos(angle + angleOffset);
-                    vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
-                    particles.push(newSpark);
-                    angle = i * 2 * Math.PI / explosionParticles;
-                }
-                break;
+                case 3: //8 point star
+                    var modifiedPower;
+                    var modifier = Math.PI / 4;
+                    for (i = 0; i < explosionParticles; i++) {
+                        modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
+                        modifiedPower = realPower * Math.pow(((modifier + 1) / (modifiedPower + 1)), 2);
+                        vx = modifiedPower * Math.cos(angle + angleOffset);
+                        vy = modifiedPower * Math.sin(angle + angleOffset);
+                        var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
+                        particles.push(newSpark);
+                        angle = i * 2 * Math.PI / explosionParticles;
+                    }
+                    break;
+                case 4: //sheep
+                case 5: //sheep
+                    console.log("sheep");
+                    var totalLoops = 1;
+                    explosionParticles = getRandomIntRange(sheepParticlesMin, sheepParticlesMax);
+                    angleOffset = 0;
+                    realPower *= 2;
+                    var modifiedPower;
+                    var modifier = Math.PI / 4;
+                    duration = sheepDuration;
+                    realPower = sheepExplosionPower;
+                    for (i = 0; i < explosionParticles; i++) {
+                        modifiedPower = getSheepSin(angle);
+                        //console.log(modifiedPower);
+                        vx = modifiedPower[0] * realPower / 300;
+                        vy = modifiedPower[1] * realPower / 300;
+                        var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, 0.0001);
+                        particles.push(newSpark);
+                        angle = i * 2 * totalLoops * Math.PI / explosionParticles;
+                    }
+                    break;
 
-            case 3: //8 point star
-                var modifiedPower;
-                var modifier = Math.PI / 4;
-                for (i = 0; i < explosionParticles; i++) {
-                    modifiedPower = Math.abs((angle % modifier) - (modifier / 2)); // normalize between .5 of modifier to 0
-                    modifiedPower = realPower * Math.pow(((modifier + 1) / (modifiedPower + 1)), 2);
-                    vx = modifiedPower * Math.cos(angle + angleOffset);
-                    vy = modifiedPower * Math.sin(angle + angleOffset);
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, .01);
-                    particles.push(newSpark);
-                    angle = i * 2 * Math.PI / explosionParticles;
-                }
-                break;
-            case 4: //sheep
-            case 5: //sheep
-                console.log("sheep");
-                var totalLoops = 1;
-                explosionParticles = sheepParticles;
-                angleOffset = 0;
-                realPower *= 2;
-                var modifiedPower;
-                var modifier = Math.PI / 4;
-                duration = sheepDuration;
-                realPower = sheepExplosionPower;
-                for (i = 0; i < explosionParticles; i++) {
-                    modifiedPower = getSheepSin(angle);
-                    //console.log(modifiedPower);
-                    vx = modifiedPower[0] * realPower / 300;
-                    vy = modifiedPower[1] * realPower / 300;
-                    var newSpark = new burstParticle(this.context, this.x, this.y, vx, vy, duration, color, 0.0001);
-                    particles.push(newSpark);
-                    angle = i * 2 * totalLoops * Math.PI / explosionParticles;
-                }
-                break;
+            }
 
         }
-
-    }
+        //spawns sparks as it rises, a few per tick and with random offset for more of a "showering" effect
     spawnSpark() {
-        var i;
-        var offset;
-        for (i = 0; i < sparksPerTick; i++) {
-            offset = getRandomIntRange(-maxOffset, maxOffset);
-            var newSpark = new sparkParticle(this.context, this.x + offset, this.y, -this.vx / 2, -this.vy / 2);
+            var i;
+            var offset;
+            for (i = 0; i < sparksPerTick; i++) {
+                offset = getRandomIntRange(-maxOffset, maxOffset);
+                var newSpark = new sparkParticle(this.context, this.x + offset, this.y, -this.vx / 2, -this.vy / 2);
+            }
+            particles.push(newSpark);
         }
-        particles.push(newSpark);
-    }
+        //check if it "collides" with it's maximum height (basically just a max height mechanic)
     checkCollision() {
-        if (this.y <= 0) {
-            this.splat = true;
-            //this.y = context.canvas.height - fireworkHeight;
-            this.vx = 0;
-            this.vy = 0;
-            this.y = context.canvas.height - spriteSize - fireworkHeight;
+            if (this.y <= 0) {
+                this.splat = true;
+                //this.y = context.canvas.height - fireworkHeight;
+                this.vx = 0;
+                this.vy = 0;
+                this.y = context.canvas.height - spriteSize - fireworkHeight;
+            }
         }
-    }
-
+        //cool angular movement cuz thats how fireworks go
     draw() {
-
-
-        switch (this.splatStage) {
-            case 0:
-                var movementAngle = Math.atan(-this.vx / this.vy);
-                context.save();
-                context.translate(this.x, this.y);
-                context.rotate(movementAngle);
-                this.context.drawImage(this.image, 0, 0);
-                context.restore();
-                break;
-                /*
-            case 1:
-                this.context.drawImage(this.splat1, this.x, this.y);
-                break;
-            case 2:
-                this.context.drawImage(this.splat2, this.x, this.y);
-                break;
-            case 3:
-                this.context.drawImage(this.splat3, this.x, this.y);
-                break;
-            case 4:
-                this.context.drawImage(this.splat4, this.x, this.y);
-                break;
-            case 5:
-                this.context.drawImage(this.splat5, this.x, this.y);
-                break;
-            case 6:
-                this.context.drawImage(this.splat6, this.x, this.y);
-                break;
-            case 7:
-                this.context.drawImage(this.splat7, this.x, this.y);
-                break;*/
-        }
-
-
+        var movementAngle = Math.atan(-this.vx / this.vy);
+        context.save(); //save and restore because of slight imperfections with undoing translating resulting in drift
+        context.translate(this.x, this.y);
+        context.rotate(movementAngle);
+        this.context.drawImage(this.image, 0, 0);
+        context.restore();
+        break;
     }
 
 
