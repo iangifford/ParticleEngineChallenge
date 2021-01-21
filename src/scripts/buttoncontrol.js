@@ -1,3 +1,7 @@
+//for button interaction
+//certain things locked behind setup to prevent confusing interactions
+
+//for time control buttons/stop
 function highlightControl(element) {
     var stopButton = document.getElementById("stopButton");
     var startButton = document.getElementById("startButton");
@@ -27,7 +31,7 @@ function highlightControl(element) {
         console.log("Unknown button");
     }
 }
-
+//for selecting type of particle
 function highlightType(element) {
     var clearButton = document.getElementById("clearButton");
     var snowButton = document.getElementById("snowButton");
@@ -66,7 +70,7 @@ function highlightType(element) {
         rainButton.classList.remove("active");
     }
 }
-
+//wind button, also used when changing type of particle to change the button accordingly
 function toggleWind() {
 
     if (setup) {
