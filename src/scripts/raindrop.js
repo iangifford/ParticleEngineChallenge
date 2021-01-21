@@ -1,50 +1,54 @@
 const raindropAirResistance = .96;
 const rainMass = 0.5;
+//raindrop particle
 class raindropParticle extends physicsParticle {
 
     constructor(context, x, y) {
-        super(context, x, y);
-        this.splat = false;
-        this.splatTick = 0;
-        this.splatStage = 0;
-        this.setSplats();
-        this.mass = rainMass
-        this.airResistance = raindropAirResistance * (0.98 + Math.random() / 25) // +- up to 2% resistance randomly
+            super(context, x, y);
+            this.splat = false;
+            this.splatTick = 0;
+            this.splatStage = 0;
+            this.setSplats();
+            this.mass = rainMass
+            this.airResistance = raindropAirResistance * (0.98 + Math.random() / 25) // +- up to 2% resistance randomly
 
-        var randpic = getRandomInt(3);
-        var image = new Image();
-        this.image = image;
-        switch (randpic) {
-            case 0:
-                image.src = "assets/rain/raindrop0.png"
-                break;
-            case 1:
-                image.src = "assets/rain/raindrop1.png"
-                break;
-            case 2:
-                image.src = "assets/rain/raindrop2.png"
-                break;
+            var randpic = getRandomInt(3);
+            var image = new Image();
+            this.image = image;
+            //a few rain images, slightly different trails on them
+            switch (randpic) {
+                case 0:
+                    image.src = "assets/rain/raindrop0.png"
+                    break;
+                case 1:
+                    image.src = "assets/rain/raindrop1.png"
+                    break;
+                case 2:
+                    image.src = "assets/rain/raindrop2.png"
+                    break;
+            }
+
         }
-
-    }
-
+        //set the splats at the start so that theyre loaded by the time it splats
+        //can be varied or changed in the future for more dynamic splatting on the ground, for now
+        //they all use the same splat animation
     setSplats() {
-        this.splat1 = new Image();
-        this.splat1.src = "assets/rain/rainsplat1.png";
-        this.splat2 = new Image();
-        this.splat2.src = "assets/rain/rainsplat2.png";
-        this.splat3 = new Image();
-        this.splat3.src = "assets/rain/rainsplat3.png";
-        this.splat4 = new Image();
-        this.splat4.src = "assets/rain/rainsplat4.png";
-        this.splat5 = new Image();
-        this.splat5.src = "assets/rain/rainsplat5.png";
-        this.splat6 = new Image();
-        this.splat6.src = "assets/rain/rainsplat6.png";
-        this.splat7 = new Image();
-        this.splat7.src = "assets/rain/rainsplat7.png";
-    }
-
+            this.splat1 = new Image();
+            this.splat1.src = "assets/rain/rainsplat1.png";
+            this.splat2 = new Image();
+            this.splat2.src = "assets/rain/rainsplat2.png";
+            this.splat3 = new Image();
+            this.splat3.src = "assets/rain/rainsplat3.png";
+            this.splat4 = new Image();
+            this.splat4.src = "assets/rain/rainsplat4.png";
+            this.splat5 = new Image();
+            this.splat5.src = "assets/rain/rainsplat5.png";
+            this.splat6 = new Image();
+            this.splat6.src = "assets/rain/rainsplat6.png";
+            this.splat7 = new Image();
+            this.splat7.src = "assets/rain/rainsplat7.png";
+        }
+        //each tick they have to do normal stuff and check if splatting
     tick() {
         this.checkCollision();
         if (!this.dead && !this.splat) {
@@ -62,10 +66,12 @@ class raindropParticle extends physicsParticle {
             }
         } else if (this.splat) {
             //splatted rain has no velocity, no updates to anything. maintain velocity for angle calcs
+            //splat stage tells which image to draw
             if (this.splatStage > 5) {
                 this.dead = true;
             } else {
                 this.splatTick += 1;
+                //rain splat updates once per tick, but for slower splats like snow, this could be divided by another number instead
                 this.splatStage = Math.floor(this.splatTick / 1);
             }
 
