@@ -16,11 +16,7 @@ function rain() {
     spawnParticle = spawnRain;
 }
 
-function cityBackground() {
-    var cityImage = new Image();
-    cityImage.src = "assets/citybackground.png";
-    context.drawImage(cityImage, 0, 0);
-}
+
 
 function rainBackground() {
     context.fillStyle = "black";
