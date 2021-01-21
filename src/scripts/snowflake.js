@@ -1,35 +1,39 @@
 const snowflakeAirResistance = .75;
 const snowMass = 0.1;
+//snow particle
 class snowflakeParticle extends physicsParticle {
 
     constructor(context, x, y) {
-        super(context, x, y);
-        this.splat = false;
-        this.splatTick = 0;
-        this.splatStage = 0;
-        this.setSplats();
-        this.mass = snowMass * (0.98 + Math.random() / 25) // up to %2 mass diff
-        this.airResistance = snowflakeAirResistance * (0.98 + Math.random() / 25) // +- up to 2% resistance randomly
-        var randpic = getRandomInt(4);
-        var image = new Image();
-        this.image = image;
-        switch (randpic) {
-            case 0:
-                image.src = "assets/snow/snowflake0.png"
-                break;
-            case 1:
-                image.src = "assets/snow/snowflake1.png"
-                break;
-            case 2:
-                image.src = "assets/snow/snowflake2.png"
-                break;
-            case 3:
-                image.src = "assets/snow/snowflake3.png"
-                break;
+            super(context, x, y);
+            this.splat = false;
+            this.splatTick = 0;
+            this.splatStage = 0;
+            this.setSplats();
+            this.mass = snowMass * (0.98 + Math.random() / 25) // up to %2 mass diff
+            this.airResistance = snowflakeAirResistance * (0.98 + Math.random() / 25) // +- up to 2% resistance randomly
+            var randpic = getRandomInt(4);
+            var image = new Image();
+            this.image = image;
+            //lots of different flakes for realism :)
+            //todo: create random snowflake image generator with enough possibilities that every snowflake could be unique
+
+            switch (randpic) {
+                case 0:
+                    image.src = "assets/snow/snowflake0.png"
+                    break;
+                case 1:
+                    image.src = "assets/snow/snowflake1.png"
+                    break;
+                case 2:
+                    image.src = "assets/snow/snowflake2.png"
+                    break;
+                case 3:
+                    image.src = "assets/snow/snowflake3.png"
+                    break;
+            }
+
         }
-
-    }
-
+        //preset splats, but in the future the splats could be set to different sets to add more variation to the splatting
     setSplats() {
         this.splat1 = new Image();
         this.splat1.src = "assets/snow/snowsplat1.png";
@@ -47,6 +51,7 @@ class snowflakeParticle extends physicsParticle {
         this.splat7.src = "assets/snow/snowsplat7.png";
     }
 
+    //update the flake
     tick() {
         if (!this.dead && !this.splat) {
             this.ay = gravity // Currently the only source of vertical acc
@@ -63,7 +68,7 @@ class snowflakeParticle extends physicsParticle {
                 this.dead = true;
             }
         } else if (this.splat) {
-            //splatted snowflakes only get horizontal velocity
+            //splatted snowflakes only get horizontal velocity so they kinda slide with the wind, looks cool tbh
             this.ax = windShown; //Only horizontal acc
             this.vx += this.ax;
             this.vx *= snowflakeAirResistance;
@@ -79,7 +84,7 @@ class snowflakeParticle extends physicsParticle {
         this.checkCollision();
     }
 
-    checkCollision() {
+    checkCollision() { //check if splatted (hit the snow layer height, the white layer at the bottom)
         if (this.y >= this.context.canvas.height - snowHeight - spriteSize) {
             this.splat = true;
             this.vy = 0;
@@ -88,10 +93,10 @@ class snowflakeParticle extends physicsParticle {
 
     draw() {
         switch (this.splatStage) {
-            case 0:
+            case 0: //unsplatted
                 this.context.drawImage(this.image, this.x, this.y);
                 break;
-            case 1:
+            case 1: //here begins the stages of being splatted against the ground :(
                 this.context.drawImage(this.splat1, this.x, this.y);
                 break;
             case 2:
