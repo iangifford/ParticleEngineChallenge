@@ -9,15 +9,13 @@ class burstParticle extends physicsParticle {
         this.burnTick = duration;
         this.maxDuration = duration;
         this.mass = burstMass;
-        if (airResistanceModifier > 0) {
-            this.airResistance = burstAirResistance * ((1 - airResistanceModifier) + Math.random() / (0.5 / airResistanceModifier)); // +- up to 2% resistance randomly
-        } else {
-            this.airResistance = burstAirResistance;
-        }
+        //modifiable air resistance for the purposes of the fireworks (sheep have lower to clean up the look)
+        this.airResistance = burstAirResistance * ((1 - airResistanceModifier / 2) + airResistanceModifier * Math.random());
         this.vx = initialVX;
         this.vy = initialVY;
         var image = new Image();
         this.image = image;
+        //select color from input, each picture is a different one
         switch (color) {
             case 0:
                 image.src = "assets/fireworks/burst0.png"
@@ -41,7 +39,7 @@ class burstParticle extends physicsParticle {
 
     tick() {
         if (!this.dead) {
-            this.ay = gravity + heat; // heat because sparks float from heat or something
+            this.ay = gravity + heat; // heat because sparks float from the heat of burning or something
             this.ax = windShown / burstMass; //Only horizontal acc
             this.vx *= this.airResistance;
             this.vy *= this.airResistance;
@@ -49,6 +47,7 @@ class burstParticle extends physicsParticle {
             this.vy += this.ay;
             this.x += this.vx;
             this.y += this.vy;
+
             //console.log(this.y);
 
             this.burnTick -= burnDecr;
@@ -64,6 +63,8 @@ class burstParticle extends physicsParticle {
 
         if (!this.dead) {
             var movementAngle = Math.atan(-this.vx / this.vy);
+            //save and restore due to precision errors in trying to translate/untranslate
+            //leading to very tiny shifts in the context over time (1000s of ticks, but still)
             context.save();
             context.translate(this.x - (spriteSize / 2), this.y + (spriteSize / 2));
             context.rotate(movementAngle);
